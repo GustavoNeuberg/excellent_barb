@@ -124,16 +124,21 @@ document.addEventListener('DOMContentLoaded', function() {
 _Agendamento realizado via site_`;
 
         const urlEncodedMessage = encodeURIComponent(mensagem);
-
-        // 👉 Agora usando web.whatsapp.com para forçar o carregamento correto
-        const linkWhatsApp = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${urlEncodedMessage}`;
-
-        alert('Clique em "Enviar" no WhatsApp para confirmar seu agendamento.');
-        window.open(linkWhatsApp, '_blank');
+        
+        // Detecta se é mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            // Abre no app nativo do WhatsApp
+            window.location.href = `whatsapp://send?phone=${whatsappNumber}&text=${urlEncodedMessage}`;
+        } else {
+            // Abre no WhatsApp Web para desktop
+            window.open(`https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${urlEncodedMessage}`, '_blank');
+        }
 
         bookingForm.reset();
         closeModal();
     });
 
     generateAvailableTimes();
-});
+})
