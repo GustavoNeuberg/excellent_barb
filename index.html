@@ -1,67 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Excellent Barbearia</title>
-        <!-- Fontes -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
-        <!-- Ícones -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <!-- CSS -->
-        <link rel="stylesheet" href="style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <!-- Meta viewport otimizada para mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Excellent Barbearia</title>
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <!-- HEADER HTML -->
     <div class="bg-home container"> 
         <header>
+            <!-- Navbar reorganizada para mobile -->
             <nav class="navbar container">
                 <div class="icons" data-aos="fade-down">
-                    <a href="https://www.instagram.com/excellent.barbearia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-2x"></i></a>
-                    <a href="https://www.facebook.com/barbeariageremi?locale=pt_BR"><i class="fa-brands fa-facebook fa-2x"></i></a>
-                    <a href="#"><i class="fa-brands fa-tiktok fa-2x"></i></a>
+                    <a href="https://www.instagram.com/excellent.barbearia" aria-label="Instagram"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                    <a href="https://www.facebook.com/barbeariageremi" aria-label="Facebook"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                    <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok fa-lg"></i></a>
                 </div>
                 <div class="logo-img" data-aos="fade-up" data-aos-delay="300">
-                    <img max-width="60px"
-                    data-aos="flip-up"
-                    data-aos-delay="300"
-                    data-aos-duration="1500"
-                    src="assets/logobarb.png" alt="Logo da Barbearia" class="logo-img">
+                    <img src="assets/logobarb.png" alt="Logo da Barbearia" class="logo-img" loading="lazy">
                 </div>
                 <div data-aos="fade-down">
-                    <a class="buttom" href="https://agenda.meinvest.com.br/log.php">Agende seu horário</a>
+                    <button class="buttom" id="open-booking-modal">Agendar</button>
                 </div>
             </nav>
         </header>
     </div>
     
     <main class="hero" data-aos="fade-up" data-aos-duration="1500">
-        <h1>AQUI NÃO SE CORTA CABELO SE MOLDA PRESENÇA</h1>
-        <P>Horário de Funcionamento: 9:00h ás 20:00h</P>
-        <a href="https://agenda.meinvest.com.br/log.php" class="buttom-contact" target="_blank">
-            Agende seu Horário
-        </a>
+        <h1>AQUI NÃO SE CORTA CABELO<br>SE MOLDA PRESENÇA</h1>
+        <p>Horário: 9:00h ás 20:00h</p>
     </main>
-    <!--FIM DO HEADER-->
-    
-    <!-- SEÇÃO SOBRE NÓS -->
+
+    <!-- Modal de Agendamento (otimizado para mobile) -->
+    <div class="agendamento-modal" id="agendamento-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal" aria-label="Fechar modal">&times;</button>
+            <h3>Agende Seu Horário</h3>
+            
+            <form id="agendamento-form">
+                <div class="form-group">
+                    <input type="text" id="agendamento-nome" placeholder="Nome completo" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="tel" id="agendamento-whatsapp" placeholder="WhatsApp (DDD)" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="agendamento-data">Data:</label>
+                    <input type="date" id="agendamento-data" required min="">
+                </div>
+                
+                <div class="form-group">
+                    <label for="agendamento-horario">Horário:</label>
+                    <select id="agendamento-horario" required>
+                        <option value="">-- Selecione --</option>
+                        <!-- Horários serão preenchidos via JavaScript -->
+                    </select>
+                    <p class="horario-info">Horários em vermelho estão indisponíveis</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Barbeiro:</label>
+                    <div class="barbeiros-options">
+                        <label class="barbeiro-option">
+                            <input type="radio" name="barbeiro" value="Barbeiro 1 (João)" required> 
+                            <span>Abrão</span>
+                        </label>
+                        <label class="barbeiro-option">
+                            <input type="radio" name="barbeiro" value="Barbeiro 2 (Carlos)"> 
+                            <span>Wesley</span>
+                        </label>
+                        <label class="barbeiro-option">
+                            <input type="radio" name="barbeiro" value="Barbeiro 3 (Marcos)"> 
+                            <span>Daniel</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <i class="fab fa-whatsapp"></i> Confirmar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section about -->
     <section class="about">
         <div class="container about-content">
-        
-        <div class="about-image" data-aos="zoom-in" data-aos-duration="600">
-            <img  src="assets/equipebarb.png"  alt="Imagem Barbearia" />
-        </div>
+            <div class="about-image" data-aos="zoom-in" data-aos-duration="600">
+                <img src="assets/equipebarb.png" alt="Imagem Barbearia" loading="lazy">
+            </div>
 
-        <div class="about-description" data-aos="zoom-out-left" data-aos-delay="200">
-            <h2>Nossos Profissionais</h2>
-            <p>
-                Mestres da navalha, artistas da tesoura e especialistas em presença. Cada corte é pensado como um símbolo do que você quer mostrar ao mundo. Aqui, você não entra só pra mudar o visual. Entra pra marcar território.
-                Esquece tudo que você chama de barbearia. Aqui o corte é cirúrgico, o papo é de responsa e a vibe é de templo ,de estilo. Se não for pra sair se sentindo o dono da rua, a gente nem liga a máquina.
-            </p>
-        </div>
-        
+            <div class="about-description" data-aos="zoom-out-left" data-aos-delay="200">
+                <h2>Nossos Profissionais</h2>
+                <p>
+                    Mestres da navalha, artistas da tesoura e especialistas em presença. Cada corte é pensado como um símbolo do que você quer mostrar ao mundo. Aqui, você não entra só pra mudar o visual. Entra pra marcar território.
+                    Esquece tudo que você chama de barbearia. Aqui o corte é cirúrgico, o papo é de responsa e a vibe é de templo ,de estilo. Se não for pra sair se sentindo o dono da rua, a gente nem liga a máquina.
+                </p>
+            </div>
         </div>
     </section>
     
@@ -81,7 +127,7 @@
                         </svg>
                     </div>
                     <div class="card-3d__image-container">
-                        <img class="imgcard" src="assets/corte1.png" alt="Corte de Cabelo"/>
+                        <img class="imgcard" src="assets/corte1.png" alt="Corte de Cabelo" loading="lazy">
                     </div>
                     <div class="card-3d__content">
                         <p class="card-3d__title">Corte de Cabelo</p>
@@ -90,7 +136,7 @@
                     </div>
                 </div>
             </div>
-        
+            
             <!-- Card 2 - Corte de Barba -->
             <div class="haircut-3d-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="card-3d">
@@ -100,7 +146,7 @@
                         </svg>
                     </div>
                     <div class="card-3d__image-container">
-                        <img class="imgcard" src="assets/barba.jpg" alt="Corte de Barba"/>
+                        <img class="imgcard" src="assets/barba.jpg" alt="Corte de Barba" loading="lazy">
                     </div>
                     <div class="card-3d__content">
                         <p class="card-3d__title">Corte de Barba</p>
@@ -119,7 +165,7 @@
                         </svg>
                     </div>
                     <div class="card-3d__image-container">
-                        <img class="imgcard" src="assets/curso.jpg" alt="Curso de Barbeiro"/>
+                        <img class="imgcard" src="assets/curso.jpg" alt="Curso de Barbeiro" loading="lazy">
                     </div>
                     <div class="card-3d__content">
                         <p class="card-3d__title">Curso de Barbeiro</p>
@@ -138,7 +184,7 @@
                         </svg>
                     </div>
                     <div class="card-3d__image-container">
-                        <img class="imgcard" src="assets/platinado.jpg" alt="Platinado"/>
+                        <img class="imgcard" src="assets/platinado.jpg" alt="Platinado" loading="lazy">
                     </div>
                     <div class="card-3d__content">
                         <p class="card-3d__title">Platinado</p>
@@ -149,49 +195,49 @@
             </div>
         </div>
     </section>
-<!-- FIM DA SEÇÃO SERVIÇOS -->
 
-<!--FOOTER-->
-<section class="serviços">
-    <h2 class="venha">Venha nos conhecer</h2>
-    <iframe class="mapa" 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114487.60762856793!2d-48.93454079517802!3d-26.270173882616437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deafc5b2e3a98f%3A0xd5545af5cf3384b4!2sExcellent%20Barbearia!5e0!3m2!1spt-BR!2sbr!4v1745539185496!5m2!1spt-BR!2sbr" 
-        width="100%" 
-        height="450" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-</section>
+    <!--FOOTER-->
+    <section class="serviços">
+        <h2 class="venha">Venha nos conhecer</h2>
+        <div class="mapa-container">
+            <iframe class="mapa" 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114487.60762856793!2d-48.93454079517802!3d-26.270173882616437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deafc5b2e3a98f%3A0xd5545af5cf3384b4!2sExcellent%20Barbearia!5e0!3m2!1spt-BR!2sbr!4v1745539185496!5m2!1spt-BR!2sbr" 
+                width="100%" 
+                height="300" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </section>
     
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-logo">
-                <img src="assets/logobarb.png" alt="Logo da Barbearia" class="logo-img">
+                <img src="assets/logobarb.png" alt="Logo da Barbearia" class="logo-img" loading="lazy">
             </div>
             <div class="footer-icons">
-                <a href="https://www.instagram.com/excellent.barbearia?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fa-brands fa-instagram fa-2x"></i></a>
-                <a href="https://www.facebook.com/barbeariageremi?locale=pt_BR"><i class="fa-brands fa-facebook fa-2x"></i></a>
-                <a href="#"><i class="fa-brands fa-tiktok fa-2x"></i></a>
+                <a href="https://www.instagram.com/excellent.barbearia" aria-label="Instagram"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                <a href="https://www.facebook.com/barbeariageremi" aria-label="Facebook"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok fa-lg"></i></a>
             </div>
         </div>
         <p>&copy;Todos os direitos reservados.</p>
     </footer>
     
-<!-- Botão flutuante WhatsApp -->
-<a href="https://wa.me/554730286861?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20meu%20hor%C3%A1rio!%20" class="whatsapp-button" target="_blank" data-aos="zoom-in-up" data-aos-delay="40" aria-label="Fale conosco no WhatsApp">
-    <i class="fa-brands fa-whatsapp"></i>
-</a>
+    <!-- Botão flutuante WhatsApp otimizado para mobile -->
+    <a href="https://wa.me/554730286861?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20meu%20hor%C3%A1rio!%20" class="whatsapp-button" target="_blank" data-aos="zoom-in-up" data-aos-delay="40" aria-label="Fale conosco no WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 
-<!--  tag script -->
-<script src="script.js"></script>
-
-<!-- Biblioteca AOS -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-AOS.init(); 
-</script>
-
+    <!-- Scripts consolidados no final -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            disable: window.innerWidth < 768 // Desativa animações em dispositivos móveis se necessário
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>

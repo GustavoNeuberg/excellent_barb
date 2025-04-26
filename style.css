@@ -29,18 +29,20 @@
 body {
     font-family: var(--fonttext), sans-serif;
     width: 100%;
-    margin: auto;
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
     position: relative;
     background-color: var(--primary-color);
     color: var(--neutrocolor2);
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1440px;
-    margin: auto;
+    margin: 0 auto;
     padding: 0 16px;
+    width: 100%;
 }
 
 button,
@@ -62,12 +64,12 @@ button:focus-visible {
 
 svg,
 img {
-    max-width: 300px;
-    margin-top: 30px;
+    max-width: 100%;
     height: auto;
     display: block;
 }
 
+/* Header */
 header {
     width: 100%;
 }
@@ -77,16 +79,20 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 16px 0;
+    flex-wrap: wrap;
+    gap: 16px;
 }
 
 .icons {
     display: flex;
     gap: 14px;
+    order: 1;
 }
 
 i {
     color: var(--neutrocolor2);
     transition: color 0.3s ease, transform 0.3s ease;
+    font-size: 1.5rem;
 }
 
 .icons i:hover {
@@ -104,13 +110,131 @@ i {
     }
 }
 
+/* Modal de Agendamento */
+.agendamento-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalFadeIn 0.3s;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    z-index: 1;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.horario-info {
+    color: #666;
+    font-size: 0.75rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+select option:disabled {
+    color: #ff6b6b;
+    background-color: #fff5f5;
+}
+
+.barbeiros-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.barbeiro-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #128C7E;
+}
+
+/* Botão principal */
 .buttom {
     border: 1px solid var(--neutrocolor2);
-    padding: 8px 24px;
+    padding: 8px 16px;
     border-radius: 4px;
     background-color: transparent;
     color: var(--neutrocolor2);
     transition: background-color 0.3s ease, border-color 0.3s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .buttom:hover {
@@ -134,13 +258,14 @@ i {
     position: absolute;
     width: 100%;
     height: 50vh;
+    min-height: 300px;
     top: 0;
     left: 0;
     z-index: -1;
     background-image: linear-gradient(to bottom, rgba(6, 18, 30, 0.1), #06121e), url(assets/imgbarb.jpg);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: 50% 0;
+    background-position: center;
     opacity: 0.9;
 }
 
@@ -160,62 +285,43 @@ h1 {
     font-family: var(--fonth1);
     color: var(--neutrocolor2);
     max-width: 940px;
-    font-size: 48px;
+    font-size: 2rem;
     line-height: 1.3;
+    padding: 0 16px;
 }
 
 p {
     margin: 14px 0;
     font-family: var(--fonttext);
-    font-size: 18px;
-}
-
-.buttom-contact {
-    padding: 14px 28px;
-    background-color: var(--buttomcolor2);
-    color: var(--neutrocolor2);
-    border: none;
-    font-size: 18px;
-    border-radius: 4px;
-}
-
-.buttom-contact:hover {
-    animation: scaleButtom 0.8s infinite alternate ease-in-out;
-}
-
-@keyframes scaleButtom {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.07);
-    }
+    font-size: 1rem;
 }
 
 /* About Section */
 .about {
-    padding: 20px;
+    padding: 40px 16px;
     background-color: var(--primary-color);
 }
 
 .about-content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 40px;
+    justify-content: center;
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    flex-wrap: wrap; 
+    flex-direction: column;
 }
 
 .about-image {
     flex: 1;
-    min-width: 280px;
+    min-width: 0;
+    width: 100%;
+    max-width: 500px;
     text-align: center;
 }
 
 .about-image img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: 8px;
     padding: 5px;
@@ -223,36 +329,37 @@ p {
 
 .about-description {
     flex: 1;
-    min-width: 300px;
-    padding: 10px;
+    min-width: 0;
+    width: 100%;
+    padding: 0;
 }
 
 .about-description h2 {
-    font-size: 34px;
-    margin-bottom: 24px;
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
 .about-description p {
-    font-size: 18px;
-    text-align: justify;
+    font-size: 1rem;
+    text-align: center;
     line-height: 1.6;
 }
 
-/* Container dos cards */
 /* Services Section */
 .services {
-    padding: 60px 15px;
+    padding: 40px 16px;
     background-color: #fff; 
 }
 
 .services-content {
     text-align: center; 
     max-width: 800px;
-    margin: 0 auto 40px;
+    margin: 0 auto 30px;
 }
 
 .services-content h2 {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     color: var(--primary-color);
     margin-bottom: 15px;
     position: relative;
@@ -266,30 +373,30 @@ p {
     bottom: -20px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.2rem;
+    font-size: 1rem;
     background: none;
 }
 
 .services-content p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #666;
     font-family: 'Oswald', sans-serif;
     margin-top: 30px;
 }
 
-/* Cards Container - Versão Aprimorada */
+/* Cards Container */
 .haircuts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 25px;
-    padding: 0 15px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 0;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-/* Card 3D - Versão Corrigida */
+/* Card 3D */
 .haircut-3d-card {
-    height: 380px;
+    height: 320px;
     perspective: 1000px;
 }
 
@@ -306,13 +413,12 @@ p {
     border: 1px solid #eee;
 }
 
-/* Chamada de Ação */
 .card-3d__hint {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    width: 36px;
-    height: 36px;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
     background: rgba(212, 65, 55, 0.95);
     color: #0f0f0f;
     border-radius: 50%;
@@ -320,8 +426,8 @@ p {
     align-items: center;
     justify-content: center;
     z-index: 2;
-    opacity: 0;
-    transform: translateY(-10px);
+    opacity: 1;
+    transform: translateY(0);
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     cursor: pointer;
@@ -330,11 +436,6 @@ p {
 .card-3d__hint svg {
     width: 60%;
     height: 60%;
-}
-
-.card-3d:hover .card-3d__hint {
-    opacity: 1;
-    transform: translateY(0) rotate(15deg);
 }
 
 .card-3d__image-container {
@@ -347,13 +448,11 @@ p {
 }
 
 .imgcard {
-    width: auto;
+    width: 100%;
     height: 100%;
-    max-width: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform 0.4s ease;
-    border-radius: 10px 10px 0 0;
 }
 
 .card-3d__content {
@@ -362,7 +461,7 @@ p {
     left: 0;
     width: 100%;
     height: 45%;
-    padding: 20px;
+    padding: 16px;
     background: linear-gradient(to bottom, #fff 80%, #f9f9f9 100%);
     transform: translateY(100%);
     transition: all 0.4s ease;
@@ -386,16 +485,16 @@ p {
 }
 
 .card-3d__title {
-    margin: 0 0 10px 0;
-    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
     color: var(--primary-color);
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
 }
 
 .card-3d__description {
-    margin: 0 0 15px 0;
-    font-size: 0.95rem;
+    margin: 0 0 12px 0;
+    font-size: 0.85rem;
     color: #666;
     line-height: 1.5;
     font-family: 'Roboto', sans-serif;
@@ -407,7 +506,7 @@ p {
 }
 
 .card-3d__button {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 5px;
     background-color: var(--buttomcolor);
@@ -420,6 +519,7 @@ p {
     align-self: flex-start;
     margin-top: auto;
     box-shadow: 0 2px 10px rgba(217, 65, 64, 0.3);
+    font-size: 0.85rem;
 }
 
 .card-3d__button:hover {
@@ -428,85 +528,34 @@ p {
     box-shadow: 0 4px 15px rgba(217, 65, 64, 0.4);
 }
 
-/* Responsividade Aprimorada */
-@media (min-width: 769px) {
-    .imgcard {
-        width: 100%;
-        height: 100%;
-    }
+/* Mapa */
+.serviços {
+    padding: 40px 16px;
+    background-color: var(--neutrocolor2);
 }
 
-@media (max-width: 768px) {
-    .services {
-        padding: 40px 10px;
-    }
-    
-    .services-content h2 {
-        font-size: 2rem;
-    }
-    
-    .services-content p {
-        font-size: 1rem;
-        margin-top: 25px;
-    }
-    
-    .haircuts {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 20px;
-    }
-    
-    .haircut-3d-card {
-        height: 350px;
-    }
-    
-    .card-3d__hint {
-        opacity: 1;
-        width: 30px;
-        height: 30px;
-    }
+.venha {
+    font-size: 1.5rem;
+    font-family: var(--fonth1);
+    text-align: center;
+    color: var(--primary-color);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
 
-@media (max-width: 480px) {
-    .haircut-3d-card {
-        height: 320px;
-        max-width: 100%;
-    }
-    
-    .card-3d__content {
-        padding: 15px;
-        height: 50%;
-    }
-    
-    .card-3d__title {
-        font-size: 1.2rem;
-    }
-    
-    .card-3d__description {
-        font-size: 0.85rem;
-        -webkit-line-clamp: 2;
-    }
-    
-    .card-3d__button {
-        padding: 8px 16px;
-        font-size: 0.9rem;
-    }
-    
-    .card-3d__hint {
-        animation: pulse 2s infinite;
-    }
-    
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.1); }
-        100% { transform: scale(1); }
-    }
+.mapa-container {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 320px) {
-    .haircuts {
-        grid-template-columns: 1fr;
-    }
+.mapa {
+    width: 100%;
+    height: 300px;
+    border: none;
 }
+
 /* Footer */
 .footer {
     display: flex;
@@ -514,31 +563,30 @@ p {
     align-items: center;
     background-color: var(--primary-color);
     color: var(--neutrocolor2);
-    padding: 60px 20px 30px; 
+    padding: 40px 16px 20px;
     text-align: center;
     width: 100%;
 }
 
 .footer-content {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 30px;
     max-width: 1200px;
     width: 100%;
-    margin: 0 auto 40px; 
+    margin: 0 auto 30px;
 }
 
 .footer-logo {
-    flex: 1 1 200px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .footer-logo img {
-    width: 180px; 
+    width: 150px;
     height: auto;
     transition: transform 0.3s ease;
 }
@@ -548,22 +596,21 @@ p {
 }
 
 .footer-icons {
-    flex: 1 1 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px; 
+    gap: 20px;
 }
 
 .footer-icons a {
     color: var(--neutrocolor2);
     transition: all 0.3s ease;
-    font-size: 28px; 
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -574,87 +621,37 @@ p {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-.venha {
-    font-size: 24px;
-    font-family: var(--fonth1);
-    text-align: center;
-    color: var(--primary-color);
-    padding-bottom: 20px;
-    background-color: var(--neutrocolor2);
-}
-
 .footer p {
     width: 100%;
-    margin-top: 30px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 0.8rem;
     opacity: 0.7;
     color: var(--neutrocolor2);
 }
 
-/* Responsivo para telas menores */
-@media (max-width: 768px) {
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 40px;
-    }
-
-    .footer-logo {
-        margin-bottom: 20px;
-    }
-
-    .footer-logo img {
-        width: 250px;
-    }
-
-    .footer-icons {
-        gap: 30px;
-    }
-
-    .footer-icons a {
-        font-size: 24px;
-        width: 45px;
-        height: 45px;
-    }
-}
-
-@media (max-width: 480px) {
-    .footer {
-        padding: 50px 20px 25px;
-    }
-
-    .footer-logo img {
-        width: 130px;
-    }
-
-    .footer-icons a {
-        font-size: 22px;
-        width: 40px;
-        height: 40px;
-    }
-}
 /* WhatsApp Button */
 .whatsapp-button {
     position: fixed;
-    bottom: 24px;
-    right: 24px;
+    bottom: 20px;
+    right: 20px;
     background-color: #25d366;
     color: white;
-    width: 64px;
-    height: 64px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     animation: floatIn 0.6s ease forwards;
     opacity: 0;
+    border: none;
 }
 
 .whatsapp-button i,
 .whatsapp-button svg {
-    font-size: 28px;
+    font-size: 1.5rem;
 }
 
 @keyframes floatIn {
@@ -673,56 +670,134 @@ p {
     transform: scale(1.1);
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+/* Media Queries */
+@media (min-width: 768px) {
     .navbar {
-        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0;
     }
-
-    .logo {
-        width: 100px;
-        margin-top: 46px;
+    
+    .icons {
+        order: 0;
     }
-
-    .buttom {
-        visibility: hidden;
+    
+    h1 {
+        font-size: 2.5rem;
     }
-
-    .hero h1 {
-        font-size: 34px;
-        font-family: var(--fonth1);
-    }
-
-    p {
-        font-size: 14px;
-        font-family: var(--fonttext);
-    }
-
+    
     .about-content {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        text-align: left;
     }
-
+    
+    .about-description {
+        padding: 0 20px;
+    }
+    
+    .about-description h2,
+    .about-description p {
+        text-align: left;
+    }
+    
     .footer-content {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .footer-icons {
+        gap: 25px;
+    }
+    
+    .whatsapp-button {
+        width: 64px;
+        height: 64px;
+    }
+    
+    .whatsapp-button i,
+    .whatsapp-button svg {
+        font-size: 1.75rem;
+    }
+}
+
+@media (min-width: 992px) {
+    h1 {
+        font-size: 3rem;
+    }
+    
+    .about-description h2 {
+        font-size: 2.2rem;
+    }
+    
+    .about-description p {
+        font-size: 1.1rem;
+    }
+    
+    .services-content h2 {
+        font-size: 2.2rem;
+    }
+    
+    .services-content p {
+        font-size: 1.1rem;
+    }
+    
+    .card-3d__title {
+        font-size: 1.3rem;
+    }
+    
+    .card-3d__description {
+        font-size: 0.9rem;
+    }
+    
+    .card-3d__button {
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero h1 {
-        font-size: 24px;
+    .hero {
+        min-height: 30vh;
     }
-
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .buttom {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .haircut-3d-card {
+        height: 300px;
+    }
+    
+    .card-3d__content {
+        padding: 12px;
+    }
+    
+    .card-3d__title {
+        font-size: 1.1rem;
+    }
+    
+    .card-3d__description {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+    }
+    
+    .card-3d__button {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
     .whatsapp-button {
+        width: 50px;
+        height: 50px;
         bottom: 16px;
         right: 16px;
-        width: 56px;
-        height: 56px;
     }
-
+    
     .whatsapp-button i,
     .whatsapp-button svg {
-        font-size: 24px;
+        font-size: 1.25rem;
     }
 }
