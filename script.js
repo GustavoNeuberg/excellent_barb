@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = { nome, whatsapp, data, horario, barbeiro, timestamp };
         saveBooking(formData);
 
-        const whatsappNumber = "554791447298";
+        const whatsappNumber = "554730286861";
         const formattedDate = new Date(data + 'T12:00:00').toLocaleDateString('pt-BR');
 
         const mensagem =
